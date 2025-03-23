@@ -15,7 +15,7 @@ VSCodeで複数ファイルを編集しているとき、タブを切り替え�
 
 [🔗 Cursorghost - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=kupuma-ru21.Cursorghost)
 
-この拡張機能は、**ファイルタブを切り替えたときにカーソルを最後の位置に自動で戻してくれる**というextensionです。
+この拡張機能は、**ファイルタブを切り替えたときにカーソル位置をタブ間で自動で同期する**というextensionです。
 
 ---
 
