@@ -1,5 +1,5 @@
 ---
-title: "VSCodeのdiffエディタでカーソル位置をキープ！Cursorghostを作った話"
+title: "VSCodeのdiffエディタでカーソル位置を同期する拡張を作った話"
 emoji: "🧙‍♂️"
 type: "tech"
 topics: ["vscode", "extension", "typescript"]
@@ -56,9 +56,5 @@ Cursorghostは以下のような仕組みで動いています：
 ---
 
 ## 🙏 最後に
-
-VSCodeは強力なツールですが、「ほんのちょっとしたUXのズレ」が集中力を削ぐこともあります。
-
-Cursorghostはそんな “ちょっとした不便” を解消する小さな魔法のような拡張機能です。
 
 もし便利だと感じたら、ぜひ拡張機能に⭐️やZennのいいねをしていただけると励みになります！
