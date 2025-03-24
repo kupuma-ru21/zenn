@@ -1,27 +1,30 @@
 ---
-title: "VSCodeでタブを切り替えてもカーソル位置をキープ！Cursorghostを作った話"
+title: "VSCodeのdiffエディタでカーソル位置をキープ！Cursorghostを作った話"
 emoji: "🧙‍♂️"
-type: "tech" # tech or idea
+type: "tech"
 topics: ["vscode", "extension", "typescript"]
 published: true
-slug: "vscode-cursorghost-extension"
+slug: "vscode-cursorghost-diff-extension"
 ---
 
-VSCodeで複数ファイルを同時に開き、ファイルタブを切り替えた際に「さっきのカーソル位置どこだっけ…？」ってなることが多くありました。
+VSCodeでコードの差分（diff）を確認しているときに、**片方のペインでカーソルを動かすと、もう片方に切り替えた際に「さっきどこ見てたっけ…？」と迷子になること**、がよくありました。
 
-私はこの問題に悩まされていたので、Vscodeのextensionを作成し解決しました。
+この問題を解決するために、VSCodeの拡張機能を作りました。
+
+---
 
 ## 🧠 作った拡張機能：Cursorghost
 
 [🔗 Cursorghost - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=kupuma-ru21.Cursorghost)
 
-この拡張機能は、**ファイルタブを切り替えたときにカーソル位置をファイルタブ間で自動で同期する**というextensionです。
+この拡張機能は、**diffエディタで左右のペインを切り替えたときに、前回見ていたカーソル位置を自動で復元**してくれるVSCode拡張です。
 
 ---
 
 ## 🎯 解決したかった課題
 
-VSCodeで複数タブを行き来しながら編集していると、**どこを編集していたのか見失う**ことが多々ありました。
+コードレビューや変更確認のためにdiffビューを開いているとき、
+左右のペインを行き来すると**カーソル位置がリセットされてしまい、前に見ていた行を見失う**ことがよくありました。
 
 ---
 
@@ -29,12 +32,14 @@ VSCodeで複数タブを行き来しながら編集していると、**どこを
 
 Cursorghostは以下のような仕組みで動いています：
 
-- `onDidChangeActiveTextEditor` を使ってアクティブなタブの変化を検知
-- タブを離れるときに、そのファイルとカーソルのlineを記録
-- 再びそのタブに戻ったとき、自動的にそのlineにカーソルを移動
+- `onDidChangeTextEditorSelection` で、diffエディタ内で現在アクティブな行を記録
+- `onDidChangeActiveTextEditor` でdiffエディタ間の切り替えを検知
+- `TabInputTextDiff` を使って「diffビューであること」を判定
+- 切り替え先のペインに、自動的にカーソル位置を復元
 
-実装はTypeScriptで書いています。
-拡張のコードはGitHubにも公開しているので、興味がある方はぜひ見てください👇
+差分エディタ専用の挙動なので、通常のファイル編集中には影響を与えません。
+
+ソースコードはTypeScriptで書いており、GitHubでも公開しています👇
 
 🔗 [GitHub - kupuma-ru21/cursorghost](https://github.com/kupuma-ru21/cursorghost)
 
@@ -44,14 +49,16 @@ Cursorghostは以下のような仕組みで動いています：
 
 1. VSCodeの拡張機能で `Cursorghost` を検索
 2. インストール
-3. タブを切り替えるだけでOK！
+3. diffエディタを開いて、カーソルを動かしてみてください！
 
-設定不要で、自動的にカーソルを記憶・復元してくれます。
+左右のペインを切り替えるだけで、自動的に前のカーソル位置に戻ってくれるようになります。
 
 ---
 
 ## 🙏 最後に
 
-「ちょっと便利な改善」で、コーディング体験は大きく変わると実感しました。
+VSCodeは強力なツールですが、「ほんのちょっとしたUXのズレ」が集中力を削ぐこともあります。
 
-この記事が役に立ったら、ぜひ拡張機能の⭐️やZennのいいねで応援してもらえると嬉しいです！
+Cursorghostはそんな “ちょっとした不便” を解消する小さな魔法のような拡張機能です。
+
+もし便利だと感じたら、ぜひ拡張機能に⭐️やZennのいいねをしていただけると励みになります！
