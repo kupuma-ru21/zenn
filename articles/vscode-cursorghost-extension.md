@@ -2,7 +2,7 @@
 title: "VSCodeでタブを切り替えてもカーソル位置をキープ！Cursorghostを作った話"
 emoji: "🧙‍♂️"
 type: "tech" # tech or idea
-topics: ["vscode", "extension", "cursor", "typescript"]
+topics: ["vscode", "extension", "typescript"]
 published: true
 slug: "vscode-cursorghost-extension"
 ---
